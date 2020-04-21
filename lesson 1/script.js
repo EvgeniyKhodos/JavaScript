@@ -14,3 +14,5 @@ console.log(persone.name);
 // let answer = confirm("Are you here?");
 
 console.log("Evgeny" + " Khodos");
+
+alert("Test");
