@@ -1,7 +1,16 @@
 "use strict";
 
-let money = +prompt("Ваш бюджет на месяц?", "60000"),
+let money, time;
+
+function start() {
+    money = +prompt("Ваш бюджет на месяц?", "60000"),
     time = prompt("Введите дату в формате YYYY-MM-DD", "");
+
+    while(isNaN(money) || money == "" || money == null) {
+        money = +prompt("Ваш бюджет на месяц?", "60000");
+    }
+
+}
 
 let appData = {
     budget: money,
@@ -12,23 +21,29 @@ let appData = {
     savings: false
 };
 
-let i = 0;
+function chooseExpenses() {
+    let i = 0;
 
-do {
-    i++;
-    let a = prompt("Введите обязательную статью расходов в этом месяце", "Еда"),
-        b = prompt("Во сколько обойдется?", "10000");
-    
-    if ((typeof(a) == 'string') && (a != '') && (b !='') && (typeof(a) != null) && (typeof(b) != null)
-    && (a.length < 50)) {
-        console.log('done');
-        appData.expenses[a] = b; 
-    } else {
-        i--;
-    }
-} while (i < 2);
+    do {
+        i++;
+        let a = prompt("Введите обязательную статью расходов в этом месяце", "Еда"),
+            b = prompt("Во сколько обойдется?", "10000");
+        
+        if ((typeof(a) == 'string') && (a != '') && (b !='') && (typeof(a) != null) && (typeof(b) != null)
+        && (a.length < 50)) {
+            console.log('done');
+            appData.expenses[a] = b; 
+        } else {
+            i--;
+        }
+    } while (i < 2);
+}
 
-appData.moneyPerDay = appData.budget / 30;
+start();
+
+chooseExpenses();
+
+appData.moneyPerDay = (appData.budget / 30).toFixed;
 
 console.log(appData);
 
