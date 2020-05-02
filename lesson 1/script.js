@@ -3,7 +3,7 @@
 let money, time;
 
 function start() {
-    money = +prompt("Ваш бюджет на месяц?", ''),
+    money = +prompt("Ваш бюджет на месяц?", '50000'),
         time = prompt("Введите дату в формате YYYY-MM-DD", "");
 
     while (isNaN(money) || money == "" || money == null) {
@@ -75,20 +75,31 @@ let appData = {
         }
     },
     chooseOptExpress: function () {
-        for (let i = 1;i < 3 ; i++) {
+        for (let i = 1; i < 3; i++) {
             let opt = prompt("Статья необязательных расходов?", "");
             appData.optionalExpenses[i] = opt;
         }
-     },
+    },
     chooseIncome: function () {
         let items = prompt('Что принесет дополнительный доход? (Перечислите через запятую)', '');
 
-        while ((typeof(items) != 'string') && (items == '') && (typeof(items) == null) ) {
+        while ((typeof (items) != 'string') || (items == '') || (typeof (items) == null)) {
             let items = prompt('Что принесет дополнительный доход? (Перечислите через запятую)', '')
-        };
+        }
+        ;
 
-        appData.income = items.split(', ');
+        appData.income = items.split(',');
+
         appData.income.push(prompt('Может что-то еще?'));
+        appData.income.sort();
+        appData.income.forEach(function (element, index) {
+            console.log("Способы доп. заработка №" + (index+1) + " : " + element)
+        });
+
+        console.log("Наша программа включает в себя данные: ");
+        for (let key in appData) {
+            console.log("Наша программа включает в себя данные: " + key + " : " + appData[key]);
+        }
     }
 };
 
